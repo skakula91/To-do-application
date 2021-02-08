@@ -9,7 +9,17 @@ class HelloWorldService
 
     executeHelloWorldServiceException()
     {
-       return axios.get('http://localhost:8080/test-exceptions');
+       let username = 'user';
+       let password = 'password';
+
+      //  window.btoa is base64 encoding
+       let basicAuthHeader = 'Basic '+ window.btoa(username + ":" + password)
+       return axios.get('http://localhost:8080/test-exceptions',
+       {
+          headers : {
+             authorization: basicAuthHeader
+          }
+       });
     }
 }
 export default new HelloWorldService()

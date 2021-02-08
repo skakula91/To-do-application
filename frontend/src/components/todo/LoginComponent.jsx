@@ -37,20 +37,36 @@ class LoginComponent extends Component
 
     loginClicked()
     {
-        if((this.state.username === 'sai' ||  this.state.username === 'shravya' )&& this.state.password === 'test')
-        {
-            AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
-            //redirect to welcome page
-            this.props.history.push(`/welcome/${this.state.username}`)
-            this.setState({showSuccessMessage:true})
-            this.setState({hasLoginFailed:false})
+        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+        .then(
+            ()=>{
+                AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
+                //redirect to welcome page
+                this.props.history.push(`/welcome/${this.state.username}`)
+                this.setState({showSuccessMessage:true})
+                this.setState({hasLoginFailed:false})
+            }
+        )
+        .catch(
+            () => {
+                this.setState({showSuccessMessage:false})
+                this.setState({hasLoginFailed:true})
+            }
+        )
+        //if((this.state.username === 'sai' ||  this.state.username === 'shravya' )&& this.state.password === 'test')
+        // {
+        //     AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
+        //     //redirect to welcome page
+        //     this.props.history.push(`/welcome/${this.state.username}`)
+        //     this.setState({showSuccessMessage:true})
+        //     this.setState({hasLoginFailed:false})
 
-        }
-        else
-        {
-            this.setState({showSuccessMessage:false})
-            this.setState({hasLoginFailed:true})
-        }
+        // }
+        // else
+        // {
+        //     this.setState({showSuccessMessage:false})
+        //     this.setState({hasLoginFailed:true})
+        // }
             
         //console.log(this.state)
     }

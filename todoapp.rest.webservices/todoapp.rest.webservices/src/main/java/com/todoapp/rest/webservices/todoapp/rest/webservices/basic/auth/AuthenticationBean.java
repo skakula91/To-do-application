@@ -1,4 +1,4 @@
-package com.todoapp.rest.webservices.rest.basic.auth;
+package com.todoapp.rest.webservices.todoapp.rest.webservices.basic.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
